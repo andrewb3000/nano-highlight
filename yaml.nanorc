@@ -1,0 +1,47 @@
+syntax "yaml" "\.ya?ml$"
+#comment "#"
+header "^---" "%YAML"
+
+## Values
+color green "(:|^|\s)+\S+"
+
+## Keys
+#color red "(^|\s+).*+\s*:(\s|$)"
+color white "(^|\s+).*+\s*:(\s|$)"
+
+## Special values
+#color yellow "[:-]\s+(true|false|null)\s*$"
+color brightcyan "\<(true|false|True|False)\>"
+color brightcyan  "\<(YES|yes|Y|y|ON|on|NO|no|N|n|OFF|off)\>"
+color brightyellow "[:-]\s+[0-9]+\.?[0-9]*(\s*($|#))"
+color yellow "(^| )!!(binary|bool|float|int|map|null|omap|seq|set|str) "
+#color green     "(^| )!!(binary|bool|float|int|map|null|omap|seq|set|str) "
+
+## Separator
+color red "^\s+-"
+color red ":(\s|\t|$)"
+color red ":[[:space:]]" "\[" "\]" ":[[:space:]]+[|>]" "^[[:space:]]*- "
+color brightmagenta  "^---" "^\.\.\." "^%YAML" "^%TAG"
+
+## Comments
+#color white "(^|[[:space:]])#.*$"
+color brightblack "(^|[[:space:]])#([^{].*)?$"
+
+## Unknown
+color brightyellow "[[:space:]][\*&][A-Za-z0-9]+"
+## Quotes
+color yellow ""(\\.|[^"])*"|'(\\.|[^'])*'"
+
+# Empty spaces
+#color ,green "[[:space:]]+$"
+#color ,yellow " + +| + +"
+
+## Errors
+#color ,red ":\w.+$"
+color ,red ":'.+$"
+color ,red ":".+$"
+color ,red "\s+$"
+
+## Non closed quote
+color ,red "['\"][^['\"]]*$"
+
